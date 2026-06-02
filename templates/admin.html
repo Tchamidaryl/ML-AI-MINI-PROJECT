@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — ProLearn EduBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#0a1628; --navy-mid:#0f2040; --navy-light:#162a50;
+      --blue:#1a6eff; --accent:#00d4aa; --white:#f0f4ff;
+      --white-dim:#c8d4f0; --muted:#6a7fa8; --border:rgba(255,255,255,0.07);
+      --font:'Sora',sans-serif; --mono:'DM Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:var(--navy);color:var(--white);min-height:100vh}
+    ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-thumb{background:var(--navy-light);border-radius:10px}
+
+    .topbar{background:var(--navy-mid);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+    .topbar h1{font-size:16px;font-weight:700} .topbar a{color:var(--muted);text-decoration:none;font-size:13px}
+    .topbar a:hover{color:var(--white)}
+
+    .container{max-width:1100px;margin:0 auto;padding:32px 24px}
+
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+    .stat-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:14px;padding:20px 24px}
+    .stat-label{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:8px}
+    .stat-value{font-size:32px;font-weight:700;font-family:var(--mono)}
+    .stat-value.blue{color:var(--blue)} .stat-value.green{color:var(--accent)} .stat-value.red{color:#ff6b6b}
+
+    .section{margin-bottom:32px}
+    .section-title{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px}
+
+    .table{width:100%;border-collapse:collapse;font-size:13px}
+    .table th{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.8px}
+    .table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--white-dim);vertical-align:top;line-height:1.5}
+    .table tr:last-child td{border-bottom:none}
+    .table tr:hover td{background:rgba(255,255,255,0.02)}
+    .table-wrap{background:var(--navy-mid);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+
+    .tag{display:inline-block;background:rgba(26,110,255,0.15);border:1px solid rgba(26,110,255,0.25);color:var(--blue);font-size:11px;padding:2px 8px;border-radius:4px;font-family:var(--mono)}
+    .tag.green{background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);color:var(--accent)}
+
+    .add-form{background:var(--navy-mid);border:1px solid var(--border);border-radius:14px;padding:24px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    .form-group label{display:block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:6px}
+    .form-group input,.form-group textarea,.form-group select{width:100%;background:var(--navy-light);border:1px solid var(--border);border-radius:8px;color:var(--white);font-family:var(--font);font-size:13px;padding:10px 12px;outline:none}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(26,110,255,0.5)}
+    .btn{background:var(--blue);border:none;border-radius:8px;color:#fff;font-family:var(--font);font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer}
+    .btn:hover{opacity:0.9} #formStatus{font-size:12px;color:var(--accent);margin-top:10px}
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>📊 EduBot Admin Dashboard</h1>
+  <a href="/">← Back to Chatbot</a>
+</div>
+
+<div class="container">
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total Messages</div>
+      <div class="stat-value blue">{{ total_messages }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unique Sessions</div>
+      <div class="stat-value green">{{ unique_sessions }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unanswered Questions</div>
+      <div class="stat-value red">{{ unanswered_count }}</div>
+    </div>
+  </div>
+
+  <!-- Top Questions -->
+  <div class="section">
+    <div class="section-title">Top User Questions</div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>#</th><th>Question</th><th>Count</th></tr></thead>
+        <tbody>
+          {% for q, count in top_questions %}
+          <tr>
+            <td><span class="tag">{{ loop.index }}</span></td>
+            <td>{{ q }}</td>
+            <td><span class="tag green">{{ count }}</span></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" style="color:var(--muted);text-align:center;padding:20px">No data yet</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Unanswered Questions -->
+  <div class="section">
+    <div class="section-title">Unanswered / Low-Confidence Questions</div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Timestamp</th><th>Question</th><th>Session</th></tr></thead>
+        <tbody>
+          {% for item in unanswered %}
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px">{{ item.timestamp[:16] }}</td>
+            <td>{{ item.question }}</td>
+            <td style="font-family:var(--mono);font-size:11px">{{ item.session_id[:8] }}...</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" style="color:var(--muted);text-align:center;padding:20px">No unanswered questions 🎉</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Contact Requests -->
+  <div class="section">
+    <div class="section-title">Human Support Requests</div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Timestamp</th><th>Name</th><th>Email</th><th>Message</th></tr></thead>
+        <tbody>
+          {% for r in contact_requests %}
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px">{{ r.timestamp[:16] }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.email }}</td>
+            <td>{{ r.message[:80] }}{% if r.message|length > 80 %}...{% endif %}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="4" style="color:var(--muted);text-align:center;padding:20px">No contact requests yet</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Recent Logs -->
+  <div class="section">
+    <div class="section-title">Recent Conversations (Last 20)</div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Time</th><th>User Question</th><th>Bot Response (excerpt)</th></tr></thead>
+        <tbody>
+          {% for log in recent_logs %}
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;white-space:nowrap">{{ log.timestamp[:16] }}</td>
+            <td>{{ log.user_message[:60] }}{% if log.user_message|length > 60 %}...{% endif %}</td>
+            <td style="color:var(--muted)">{{ log.bot_response[:80] }}{% if log.bot_response|length > 80 %}...{% endif %}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" style="color:var(--muted);text-align:center;padding:20px">No conversations yet</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add to Knowledge Base -->
+  <div class="section">
+    <div class="section-title">Add to Knowledge Base</div>
+    <div class="add-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category</label>
+          <select id="kbCategory">
+            <option value="courses">courses</option>
+            <option value="fees">fees</option>
+            <option value="registration">registration</option>
+            <option value="certification">certification</option>
+            <option value="facilities">facilities</option>
+            <option value="support">support</option>
+            <option value="location">location</option>
+            <option value="instructors">instructors</option>
+            <option value="policies">policies</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Primary Question</label>
+          <input type="text" id="kbQuestion" placeholder="e.g. Do you offer night classes?" />
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Answer</label>
+        <textarea id="kbAnswer" rows="3" placeholder="Write the answer that the chatbot should give..."></textarea>
+      </div>
+      <button class="btn" id="addKbBtn">Add to Knowledge Base</button>
+      <p id="formStatus"></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("addKbBtn").addEventListener("click", async () => {
+  const category = document.getElementById("kbCategory").value;
+  const question = document.getElementById("kbQuestion").value.trim();
+  const answer   = document.getElementById("kbAnswer").value.trim();
+  const status   = document.getElementById("formStatus");
+
+  if (!question || !answer) {
+    status.style.color = "#ff6b6b";
+    status.textContent = "Please fill in both the question and answer.";
+    return;
+  }
+
+  const payload = {
+    category,
+    qa: {
+      id: "ADMIN_" + Date.now(),
+      questions: [question],
+      answer
+    }
+  };
+
+  try {
+    const res = await fetch("/admin/update-kb", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      status.style.color = "var(--accent)";
+      status.textContent = "✓ Added successfully! Knowledge base updated.";
+      document.getElementById("kbQuestion").value = "";
+      document.getElementById("kbAnswer").value = "";
+    } else {
+      status.style.color = "#ff6b6b";
+      status.textContent = "Error: " + (data.error || "Unknown error");
+    }
+  } catch {
+    status.style.color = "#ff6b6b";
+    status.textContent = "Network error. Please try again.";
+  }
+});
+</script>
+</body>
+</html>

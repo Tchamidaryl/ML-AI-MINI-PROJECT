@@ -1,0 +1,355 @@
+{
+  "organisation": {
+    "name": "ProLearn Training Centre",
+    "tagline": "Empowering Careers Through Technology",
+    "logo": "ProLearn",
+    "theme_color": "#0D47A1",
+    "email": "info@prolearn.edu",
+    "phone": "+1 (555) 200-3000",
+    "address": "12 Innovation Drive, Tech City, TC 10001",
+    "website": "www.prolearn.edu",
+    "hours": {
+      "monday_friday": "8:00 AM – 6:00 PM",
+      "saturday": "9:00 AM – 2:00 PM",
+      "sunday": "Closed"
+    },
+    "social": {
+      "facebook": "facebook.com/prolearn",
+      "linkedin": "linkedin.com/company/prolearn",
+      "twitter": "@ProLearnTC"
+    }
+  },
+  "categories": {
+    "courses": {
+      "description": "Information about available training programs",
+      "qa": [
+        {
+          "id": "C001",
+          "questions": [
+            "What courses do you offer?",
+            "What programs are available?",
+            "What can I study at ProLearn?",
+            "Show me your course list",
+            "What training programs do you have?"
+          ],
+          "answer": "ProLearn Training Centre offers a wide range of courses including: Software Development (Python, Java, Web), Data Science & AI, Cybersecurity, Cloud Computing (AWS/Azure), Networking & IT Infrastructure, UI/UX Design, Digital Marketing, and Project Management (PMP/Agile). All courses are available in full-time, part-time, and online formats."
+        },
+        {
+          "id": "C002",
+          "questions": [
+            "How long are the courses?",
+            "What is the duration of training?",
+            "How many months is the program?",
+            "How long does a course take?"
+          ],
+          "answer": "Course durations vary: Short courses (workshops) run 1–3 days. Certificate programs take 4–8 weeks. Diploma programs take 3–6 months. Professional development courses run 8–12 weeks. Exact durations are listed on each course page at www.prolearn.edu."
+        },
+        {
+          "id": "C003",
+          "questions": [
+            "Do you offer online courses?",
+            "Can I study remotely?",
+            "Is there a distance learning option?",
+            "Are classes available online?"
+          ],
+          "answer": "Yes! ProLearn offers fully online, hybrid (mix of online and in-person), and in-centre learning modes. All online courses include live virtual sessions, recorded lectures, hands-on labs, and direct instructor support via our learning portal."
+        },
+        {
+          "id": "C004",
+          "questions": [
+            "What is the most popular course?",
+            "Which course do most students take?",
+            "What is your best course?",
+            "What do you recommend?"
+          ],
+          "answer": "Our most popular programs are: (1) Full-Stack Web Development, (2) Data Science with Python & AI, and (3) AWS Cloud Practitioner. These are highly demanded in the job market and our students consistently achieve excellent employment outcomes."
+        },
+        {
+          "id": "C005",
+          "questions": [
+            "Do you offer any short courses?",
+            "What workshops do you have?",
+            "Are there weekend courses?",
+            "Any quick certificate programs?"
+          ],
+          "answer": "Yes, we offer short courses and workshops ranging from 1 to 5 days, including Excel for Data Analysis, Introduction to Python, Cybersecurity Awareness, and Cloud Basics. These are ideal for working professionals and are often held on weekends."
+        }
+      ]
+    },
+    "fees": {
+      "description": "Pricing and payment information",
+      "qa": [
+        {
+          "id": "F001",
+          "questions": [
+            "How much does it cost?",
+            "What are the course fees?",
+            "How much do I pay?",
+            "What is the price for registration?",
+            "What is the cost of the course?"
+          ],
+          "answer": "Course fees vary by program: Short courses/workshops: $150–$500. Certificate programs: $800–$1,500. Diploma programs: $2,000–$4,500. Group discounts of 15% are available for 3 or more registrations. Contact us at info@prolearn.edu for a full fee schedule."
+        },
+        {
+          "id": "F002",
+          "questions": [
+            "Do you offer payment plans?",
+            "Can I pay in installments?",
+            "Is there a payment option?",
+            "Can I spread the payment?"
+          ],
+          "answer": "Yes! We offer flexible payment plans. You can pay in 2 or 3 installments with no interest. A 30% deposit is required at registration, with remaining installments spread over the course duration. Contact our finance team at finance@prolearn.edu to set up a plan."
+        },
+        {
+          "id": "F003",
+          "questions": [
+            "Are there any discounts?",
+            "Do students get a discount?",
+            "Is there a scholarship?",
+            "Any financial aid available?"
+          ],
+          "answer": "We offer several discount options: (1) Early bird discount: 10% off if registered 4 weeks before course start. (2) Student/recent graduate discount: 15% with valid student ID. (3) Group discount: 15% for 3+ registrations. (4) Alumni discount: 20% for ProLearn graduates. Limited scholarships are also available — email scholarships@prolearn.edu for details."
+        },
+        {
+          "id": "F004",
+          "questions": [
+            "What is the refund policy?",
+            "Can I get my money back?",
+            "What if I cancel?",
+            "Is there a cancellation policy?"
+          ],
+          "answer": "Our refund policy: Full refund if cancelled 14+ days before course start. 50% refund if cancelled 7–13 days before start. No refund within 6 days of start date. Medical or emergency cases are reviewed individually — contact support@prolearn.edu with documentation."
+        }
+      ]
+    },
+    "registration": {
+      "description": "How to register and enroll",
+      "qa": [
+        {
+          "id": "R001",
+          "questions": [
+            "How do I register?",
+            "How can I enroll?",
+            "What is the registration process?",
+            "How do I sign up for a course?",
+            "How do I apply?"
+          ],
+          "answer": "Registering at ProLearn is easy: (1) Visit www.prolearn.edu/register. (2) Create an account or log in. (3) Browse and select your course. (4) Fill in the registration form. (5) Pay the course fee or deposit. (6) Receive a confirmation email with your login details and course schedule. You can also register in person at our centre during working hours."
+        },
+        {
+          "id": "R002",
+          "questions": [
+            "What documents do I need to register?",
+            "What are the requirements for enrollment?",
+            "What do I need to bring when registering?",
+            "What documents are required?"
+          ],
+          "answer": "For registration you will need: (1) A valid government-issued ID or passport. (2) Educational certificates (for diploma programs). (3) A passport-sized photo. (4) Completed registration form. (5) Payment or proof of payment. Most documents can be submitted digitally through our portal."
+        },
+        {
+          "id": "R003",
+          "questions": [
+            "When does the next course start?",
+            "What are the upcoming intake dates?",
+            "When is the next batch?",
+            "When does enrolment open?"
+          ],
+          "answer": "ProLearn runs monthly intakes for most programs. Our next intakes start on the first Monday of each month. Online registration opens 6 weeks before each intake. Visit www.prolearn.edu/schedule or contact us at info@prolearn.edu for the current schedule."
+        },
+        {
+          "id": "R004",
+          "questions": [
+            "Is there an age requirement?",
+            "Can anyone register?",
+            "Who can apply?",
+            "What is the minimum age to join?"
+          ],
+          "answer": "Most of our programs are open to students aged 16 and above. Some advanced professional courses require prior qualifications or work experience. Full entry requirements are listed on each course page. Contact our admissions team at admissions@prolearn.edu for guidance."
+        }
+      ]
+    },
+    "certification": {
+      "description": "Certificates, accreditation, and credentials",
+      "qa": [
+        {
+          "id": "CERT001",
+          "questions": [
+            "Do you give certificates?",
+            "Will I get a certificate after completing the course?",
+            "Is the certificate recognized?",
+            "Are your certifications accredited?",
+            "What certificate will I receive?"
+          ],
+          "answer": "Yes! All ProLearn graduates receive an official certificate of completion. Our certifications are accredited by the National Training Authority and internationally recognized. We also prepare students for industry certifications such as AWS, Google, CompTIA, Cisco, and PMI exams."
+        },
+        {
+          "id": "CERT002",
+          "questions": [
+            "How do I get my certificate?",
+            "When will I receive my certificate?",
+            "How long does certification take?",
+            "When is the certificate issued?"
+          ],
+          "answer": "Certificates are issued within 2 weeks of successfully completing your course and assessments. You will receive both a physical certificate and a digital verified credential (shareable on LinkedIn). Contact certifications@prolearn.edu for replacements or verification requests."
+        }
+      ]
+    },
+    "facilities": {
+      "description": "Campus, labs, and facilities information",
+      "qa": [
+        {
+          "id": "FAC001",
+          "questions": [
+            "What facilities do you have?",
+            "Do you have computer labs?",
+            "What is the learning environment like?",
+            "What equipment is available?"
+          ],
+          "answer": "ProLearn features state-of-the-art facilities including: High-spec computer labs with latest software, dedicated cybersecurity and networking labs, collaborative co-working spaces, a digital library and resource centre, high-speed Wi-Fi throughout the campus, and a student lounge and cafeteria."
+        },
+        {
+          "id": "FAC002",
+          "questions": [
+            "Do students get laptops?",
+            "Do I need to bring my own computer?",
+            "Is equipment provided?",
+            "Do I need a laptop for the course?"
+          ],
+          "answer": "For in-centre courses, computers are provided in our labs — no need to bring your own. For online and hybrid courses, students need a computer with at least 8GB RAM and a stable internet connection. A full technical requirements list is sent in your enrollment confirmation email."
+        }
+      ]
+    },
+    "support": {
+      "description": "Student support, career services, and help",
+      "qa": [
+        {
+          "id": "S001",
+          "questions": [
+            "What support do students get?",
+            "Is there student support?",
+            "Do you offer career support?",
+            "What help is available after graduation?",
+            "Do you help with job placement?"
+          ],
+          "answer": "ProLearn provides comprehensive student support including: dedicated academic advisors, 1-on-1 mentorship sessions, career counselling and CV preparation, job placement assistance with our 200+ employer partners, alumni networking events, and lifetime access to course materials post-graduation."
+        },
+        {
+          "id": "S002",
+          "questions": [
+            "How can I contact support?",
+            "Who do I talk to if I have a problem?",
+            "How do I reach the support team?",
+            "I need help, who do I contact?"
+          ],
+          "answer": "You can reach our support team through multiple channels: Email: support@prolearn.edu | Phone: +1 (555) 200-3000 | Live chat on our website | Visit us in person at 12 Innovation Drive. Our support hours are Monday–Friday, 8:00 AM–6:00 PM, and Saturday 9:00 AM–2:00 PM."
+        },
+        {
+          "id": "S003",
+          "questions": [
+            "Do you have a student portal?",
+            "Where can I access my course materials?",
+            "Is there an online learning platform?",
+            "How do I access my lessons?"
+          ],
+          "answer": "Yes! All enrolled students get access to the ProLearn Learning Portal at portal.prolearn.edu. The portal includes: course videos and materials, assignment submissions, live session links, progress tracking, direct messaging with instructors, and community discussion boards."
+        }
+      ]
+    },
+    "location": {
+      "description": "Location and how to get there",
+      "qa": [
+        {
+          "id": "L001",
+          "questions": [
+            "Where are you located?",
+            "What is your address?",
+            "How do I find you?",
+            "Where is ProLearn?",
+            "What is your physical location?"
+          ],
+          "answer": "ProLearn Training Centre is located at: 12 Innovation Drive, Tech City, TC 10001. We are easily accessible by public transport (Bus routes 14, 27, 55) and there is free parking available on site. Google Maps: search 'ProLearn Training Centre Tech City'."
+        },
+        {
+          "id": "L002",
+          "questions": [
+            "What are your opening hours?",
+            "When are you open?",
+            "What time do you close?",
+            "Are you open on weekends?"
+          ],
+          "answer": "Our opening hours are: Monday – Friday: 8:00 AM – 6:00 PM | Saturday: 9:00 AM – 2:00 PM | Sunday: Closed. The online student portal and learning resources are available 24/7."
+        }
+      ]
+    },
+    "instructors": {
+      "description": "About our instructors and teaching quality",
+      "qa": [
+        {
+          "id": "I001",
+          "questions": [
+            "Who are the instructors?",
+            "Are the teachers qualified?",
+            "What is the quality of teaching?",
+            "Are instructors certified?"
+          ],
+          "answer": "All ProLearn instructors are industry professionals with 5+ years of real-world experience in their fields and hold relevant professional certifications (AWS, Google, Cisco, etc.). They are also trained in adult learning pedagogy. Instructor profiles are available on our website."
+        },
+        {
+          "id": "I002",
+          "questions": [
+            "What is the student-to-teacher ratio?",
+            "How many students per class?",
+            "Are classes small?",
+            "How big are the groups?"
+          ],
+          "answer": "We maintain a maximum of 20 students per class for in-centre courses, and 25 for online cohorts. This ensures personalised attention and quality instruction. Our average student satisfaction rating is 4.8/5."
+        }
+      ]
+    },
+    "policies": {
+      "description": "Centre policies and procedures",
+      "qa": [
+        {
+          "id": "P001",
+          "questions": [
+            "What is the attendance policy?",
+            "What happens if I miss a class?",
+            "Is attendance mandatory?",
+            "What if I cannot attend?"
+          ],
+          "answer": "A minimum attendance of 80% is required to qualify for certification. If you miss a class, recorded sessions are available on the portal within 24 hours. For extended absences, please inform your instructor and the administration team in advance at admin@prolearn.edu."
+        },
+        {
+          "id": "P002",
+          "questions": [
+            "What is the assessment method?",
+            "How are students evaluated?",
+            "Is there an exam?",
+            "How do you grade students?"
+          ],
+          "answer": "Assessment varies by course and may include: practical projects and assignments, online quizzes and tests, group work and presentations, and final capstone projects. There are no traditional written exams — we focus on practical, job-ready skills. A pass mark of 60% is required for certification."
+        },
+        {
+          "id": "P003",
+          "questions": [
+            "What is the code of conduct?",
+            "What are the rules?",
+            "What behaviour is expected?",
+            "Are there any rules I should know?"
+          ],
+          "answer": "ProLearn maintains a respectful, inclusive, and professional learning environment. Students are expected to: attend punctually, treat instructors and peers with respect, submit work honestly (no plagiarism), follow computer lab rules, and keep the centre clean and tidy. Full details are in the Student Handbook provided at enrollment."
+        }
+      ]
+    }
+  },
+  "fallback_responses": [
+    "I'm not sure about that specific topic. Please contact our team directly at info@prolearn.edu or call +1 (555) 200-3000 and a human advisor will be happy to help.",
+    "That's a great question! It falls outside my current knowledge. I recommend reaching out to our support team at support@prolearn.edu for a detailed and accurate answer.",
+    "I don't have enough information to answer that confidently. Please visit www.prolearn.edu or speak with one of our advisors who can give you the best guidance."
+  ],
+  "human_handoff_triggers": [
+    "complaint", "refund", "legal", "dispute", "urgent", "emergency",
+    "medical", "harassment", "discrimination", "appeal", "special needs",
+    "disability", "financial hardship", "visa", "immigration"
+  ]
+}

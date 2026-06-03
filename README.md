@@ -136,3 +136,6 @@ EduBot is an AI assistant powered by Anthropic Claude. It may occasionally provi
 
 ProLearn Training Centre  
 Email: info@prolearn.edu | Phone: +1 (555) 200-3000
+
+Scalability:
+use posthug for monitory

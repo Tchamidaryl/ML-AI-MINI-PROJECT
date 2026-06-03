@@ -135,8 +135,10 @@ EduBot is an AI assistant powered by Gemini. It may occasionally provide inaccur
 ## 📧 Contact
 
 ProLearn Training Centre  
-Email: info@prolearn.edu | Phone: +1 (555) 200-3000
+Email: tchamidaryl@gmail.com | Phone: +237 654221901
 
 Scalability:
 use posthug for monitory
-Email: tchamidaryl@gmail.com | Phone: +237 654221901
+
+Contributor:
+bryantech.dev@gmail.com

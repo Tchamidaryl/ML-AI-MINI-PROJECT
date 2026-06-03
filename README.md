@@ -128,14 +128,14 @@ Admin dashboard: **http://localhost:5000/admin**
 
 ## ⚠️ Disclaimer
 
-EduBot is an AI assistant powered by Anthropic Claude. It may occasionally provide inaccurate responses. Always verify important information with ProLearn staff directly.
+EduBot is an AI assistant powered by Gemini. It may occasionally provide inaccurate responses. Always verify important information with ProLearn staff directly.
 
 ---
 
 ## 📧 Contact
 
 ProLearn Training Centre  
-Email: info@prolearn.edu | Phone: +1 (555) 200-3000
+Email: tchamidaryl@gmail.com | Phone: +237 654221901
 
 Scalability:
 use posthug for monitory

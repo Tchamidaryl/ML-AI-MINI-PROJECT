@@ -3,136 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduBot — ProLearn Training Centre</title>
+  <title>{{ org.name or "ProLearn Training Centre" }} | AI Supported Learning</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="#home" aria-label="ProLearn home">
+        <span class="brand-logo">PL</span>
+        <span class="brand-text">
+          <span class="brand-name">ProLearn</span>
+          <span class="brand-sub">Training Centre</span>
+        </span>
+      </a>
 
-<!-- ── HEADER ────────────────────────────────────────────────────────────── -->
-<header class="header">
-  <div class="header-inner">
-    <div class="brand">
-      <div class="brand-logo">PL</div>
-      <div class="brand-text">
-        <span class="brand-name">ProLearn</span>
-        <span class="brand-sub">Training Centre</span>
-      </div>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#programs">Programs</a>
+        <a href="#admissions">Admissions</a>
+        <a href="#support">Student Support</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-    <div class="header-right">
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        AI Assistant Online
-      </div>
-    </div>
-  </div>
-</header>
+  </header>
 
-<!-- ── MAIN LAYOUT ───────────────────────────────────────────────────────── -->
-<main class="main">
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-title">Quick Help</div>
-    <div id="quick-questions" class="quick-list">
-      <div class="loading-pills">
-        <div class="pill-skeleton"></div>
-        <div class="pill-skeleton"></div>
-        <div class="pill-skeleton"></div>
-      </div>
-    </div>
-
-    <div class="sidebar-divider"></div>
-
-    <div class="sidebar-title">Contact Us</div>
-    <div class="contact-block">
-      <div class="contact-item">
-        <span class="contact-icon">📧</span>
-        <span>tchamidaryl@gmail.com</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-icon">📞</span>
-        <span>+237 654221901</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-icon">🕐</span>
-        <span>Mon–Fri 8AM–6PM</span>
-      </div>
-    </div>
-
-    <button class="human-btn" id="openContact">
-      <span>Talk to a Human</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-    </button>
-
-    <div class="disclaimer">
-      ⚠️ EduBot is an AI assistant. Responses may occasionally be inaccurate. Please verify important information with our staff.
-    </div>
-  </aside>
-
-  <!-- Chat area -->
-  <section class="chat-section">
-    <div class="chat-window" id="chatWindow">
-      <!-- Welcome message -->
-      <div class="message bot-message welcome-msg">
-        <div class="avatar bot-avatar">PL</div>
-        <div class="bubble">
-          <p>👋 Hello! I'm <strong>EduBot</strong>, ProLearn's AI assistant.</p>
-          <p>I can help you with courses, fees, registration, certifications, and more. What would you like to know today?</p>
+  <main id="home">
+    <section class="hero-section">
+      <div class="hero-content">
+        <p class="eyebrow">School and professional training centre</p>
+        <h1>Build job-ready skills with guided, practical learning.</h1>
+        <p class="hero-copy">
+          ProLearn helps learners choose courses, register for training, access support, and prepare for recognized certificates in technology and business fields.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#programs">Explore Programs</a>
+          <button class="secondary-link js-open-chat" type="button">Ask EduBot</button>
         </div>
-        <span class="ts" id="welcomeTs"></span>
       </div>
-    </div>
 
-    <!-- Input area -->
-    <div class="input-area">
-      <div class="input-row">
-        <textarea
-          id="userInput"
-          placeholder="Ask me about courses, fees, registration..."
-          rows="1"
-          maxlength="500"
-        ></textarea>
-        <button id="sendBtn" class="send-btn" aria-label="Send message">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-        </button>
+      <div class="hero-panel" aria-label="Institution highlights">
+        <div>
+          <span class="panel-value">20+</span>
+          <span class="panel-label">Professional courses</span>
+        </div>
+        <div>
+          <span class="panel-value">3</span>
+          <span class="panel-label">Learning modes</span>
+        </div>
+        <div>
+          <span class="panel-value">24/7</span>
+          <span class="panel-label">Portal access</span>
+        </div>
       </div>
-      <div class="input-meta">
-        <span id="charCount">0/500</span>
-        <span>Powered by Gemini AI · <a href="/admin" target="_blank">Admin</a></span>
+    </section>
+
+    <section class="section-band" id="programs">
+      <div class="section-heading">
+        <p class="eyebrow">Programs</p>
+        <h2>Training paths students can choose from</h2>
+      </div>
+
+      <div class="program-grid">
+        <article class="program-card">
+          <span class="program-icon">WD</span>
+          <h3>Web Development</h3>
+          <p>Learn HTML, CSS, JavaScript, Python, databases, and project deployment.</p>
+        </article>
+        <article class="program-card">
+          <span class="program-icon">AI</span>
+          <h3>Data Science and AI</h3>
+          <p>Build practical skills in Python, analytics, machine learning, and AI tools.</p>
+        </article>
+        <article class="program-card">
+          <span class="program-icon">CS</span>
+          <h3>Cybersecurity</h3>
+          <p>Study network security, risk awareness, ethical practices, and secure systems.</p>
+        </article>
+        <article class="program-card">
+          <span class="program-icon">PM</span>
+          <h3>Project Management</h3>
+          <p>Prepare for Agile, PMP fundamentals, teamwork, planning, and delivery.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-band split-section" id="admissions">
+      <div class="section-heading">
+        <p class="eyebrow">Admissions</p>
+        <h2>Simple registration for new learners</h2>
+        <p>
+          Students can create an account, select a course, submit required documents, make payment or a deposit, and receive their schedule by email.
+        </p>
+      </div>
+
+      <div class="task-list">
+        <div class="task-item">
+          <span>1</span>
+          <p>Choose a course and learning mode: full-time, part-time, online, or hybrid.</p>
+        </div>
+        <div class="task-item">
+          <span>2</span>
+          <p>Submit registration details, ID, certificate copies, and passport photo.</p>
+        </div>
+        <div class="task-item">
+          <span>3</span>
+          <p>Pay the full fee or use the installment plan with a 30% deposit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band" id="support">
+      <div class="section-heading">
+        <p class="eyebrow">Student Support</p>
+        <h2>EduBot helps visitors complete common website tasks</h2>
+      </div>
+
+      <div class="support-grid">
+        <div class="support-item">Find course information and durations</div>
+        <div class="support-item">Explain fees, discounts, and payment plans</div>
+        <div class="support-item">Guide students through registration steps</div>
+        <div class="support-item">Answer questions about certificates and facilities</div>
+        <div class="support-item">Provide opening hours, address, and contact details</div>
+        <div class="support-item">Send human support requests to staff</div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Visit or message ProLearn</h2>
+        <p>{{ org.address or "12 Innovation Drive, Tech City, TC 10001" }}</p>
+      </div>
+      <div class="contact-actions">
+        <a href="mailto:{{ org.email or 'tchamidaryl@gmail.com' }}">{{ org.email or "tchamidaryl@gmail.com" }}</a>
+        <a href="tel:{{ (org.phone or '+237654221901')|replace(' ', '') }}">{{ org.phone or "+237 654221901" }}</a>
+      </div>
+    </section>
+  </main>
+
+  <button class="chat-launcher js-open-chat" type="button" aria-label="Open EduBot AI assistant" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3v3" />
+      <path d="M7 9h10a4 4 0 0 1 4 4v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a4 4 0 0 1 4-4Z" />
+      <path d="M8 14h.01" />
+      <path d="M16 14h.01" />
+      <path d="M9 17h6" />
+    </svg>
+    <span>AI</span>
+  </button>
+
+  <section class="chat-widget" id="chatWidget" aria-label="EduBot AI assistant" aria-hidden="true">
+    <header class="chat-widget-header">
+      <div class="chat-title">
+        <span class="bot-status-dot"></span>
+        <div>
+          <strong>EduBot</strong>
+          <small>ProLearn AI Assistant</small>
+        </div>
+      </div>
+      <button class="icon-btn" id="closeChat" type="button" aria-label="Close EduBot">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+      </button>
+    </header>
+
+    <div class="chat-widget-body">
+      <aside class="quick-panel">
+        <div class="panel-title">Quick Help</div>
+        <div id="quick-questions" class="quick-list">
+          <div class="pill-skeleton"></div>
+          <div class="pill-skeleton"></div>
+          <div class="pill-skeleton"></div>
+        </div>
+        <button class="human-btn" id="openContact" type="button">Talk to a Human</button>
+      </aside>
+
+      <div class="chat-column">
+        <div class="chat-window" id="chatWindow">
+          <div class="message bot-message welcome-msg">
+            <div class="avatar bot-avatar">AI</div>
+            <div class="bubble">
+              <p>Hello! I'm <strong>EduBot</strong>, ProLearn's AI assistant.</p>
+              <p>I can help with courses, fees, registration, certificates, facilities, and support.</p>
+            </div>
+            <span class="ts" id="welcomeTs"></span>
+          </div>
+        </div>
+
+        <div class="input-area">
+          <div class="input-row">
+            <textarea id="userInput" placeholder="Ask about courses, fees, registration..." rows="1" maxlength="500"></textarea>
+            <button id="sendBtn" class="send-btn" type="button" aria-label="Send message">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+          <div class="input-meta">
+            <span id="charCount">0/500</span>
+            <span>AI answers may need staff verification</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-</main>
-
-<!-- ── CONTACT MODAL ─────────────────────────────────────────────────────── -->
-<div class="modal-overlay" id="contactModal">
-  <div class="modal">
-    <button class="modal-close" id="closeContact">✕</button>
-    <h2 class="modal-title">Talk to a Human Advisor</h2>
-    <p class="modal-sub">Fill in your details and our team will get back to you shortly.</p>
-    <div class="form-group">
-      <label>Your Name</label>
-      <input type="text" id="contactName" placeholder="e.g. Jane Smith" />
+  <div class="modal-overlay" id="contactModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+      <button class="modal-close" id="closeContact" type="button" aria-label="Close contact form">x</button>
+      <h2 class="modal-title" id="contactTitle">Talk to a Human Advisor</h2>
+      <p class="modal-sub">Fill in your details and our team will get back to you shortly.</p>
+      <div class="form-group">
+        <label for="contactName">Your Name</label>
+        <input type="text" id="contactName" placeholder="e.g. Jane Smith" />
+      </div>
+      <div class="form-group">
+        <label for="contactEmail">Email Address</label>
+        <input type="email" id="contactEmail" placeholder="e.g. jane@email.com" />
+      </div>
+      <div class="form-group">
+        <label for="contactMessage">How can we help?</label>
+        <textarea id="contactMessage" rows="4" placeholder="Describe your question or issue..."></textarea>
+      </div>
+      <button class="submit-btn" id="submitContact" type="button">Send Request</button>
+      <p class="modal-note" id="contactStatus"></p>
     </div>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="contactEmail" placeholder="e.g. jane@email.com" />
-    </div>
-    <div class="form-group">
-      <label>How can we help?</label>
-      <textarea id="contactMessage" rows="4" placeholder="Describe your question or issue..."></textarea>
-    </div>
-    <button class="submit-btn" id="submitContact">Send Request</button>
-    <p class="modal-note" id="contactStatus"></p>
   </div>
-</div>
 
-<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </body>
 </html>

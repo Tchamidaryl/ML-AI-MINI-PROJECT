@@ -1,12 +1,14 @@
-// ─── State ────────────────────────────────────────────────────────────────────
-const chatWindow  = document.getElementById("chatWindow");
-const userInput   = document.getElementById("userInput");
-const sendBtn     = document.getElementById("sendBtn");
-const charCount   = document.getElementById("charCount");
+const chatWindow = document.getElementById("chatWindow");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const charCount = document.getElementById("charCount");
+const chatWidget = document.getElementById("chatWidget");
+const closeChat = document.getElementById("closeChat");
+const chatLaunchers = document.querySelectorAll(".js-open-chat");
+const floatingLauncher = document.querySelector(".chat-launcher");
 
 let conversationHistory = [];
 
-// ─── Utils ────────────────────────────────────────────────────────────────────
 function formatTime() {
   const now = new Date();
   return now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
@@ -20,17 +22,32 @@ function escapeHTML(str) {
     .replace(/"/g, "&quot;");
 }
 
-// Basic Markdown-to-HTML: bold, bullets, numbered lists
 function renderMarkdown(text) {
-  return text
+  const escaped = escapeHTML(text);
+  return escaped
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(/^(\d+)\.\s+(.+)$/gm, "<li>$2</li>")
-    .replace(/^[-•]\s+(.+)$/gm, "<li>$1</li>")
-    .replace(/(<li>.*<\/li>\n?)+/g, (m) => `<ul>${m}</ul>`)
+    .replace(/^[-*]\s+(.+)$/gm, "<li>$1</li>")
+    .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`)
     .replace(/\n\n/g, "</p><p>")
     .replace(/\n/g, "<br>")
     .trim();
+}
+
+function openChat() {
+  chatWidget.classList.add("open");
+  chatWidget.setAttribute("aria-hidden", "false");
+  floatingLauncher.classList.add("hidden");
+  floatingLauncher.setAttribute("aria-expanded", "true");
+  setTimeout(() => userInput.focus(), 80);
+}
+
+function hideChat() {
+  chatWidget.classList.remove("open");
+  chatWidget.setAttribute("aria-hidden", "true");
+  floatingLauncher.classList.remove("hidden");
+  floatingLauncher.setAttribute("aria-expanded", "false");
 }
 
 function appendMessage(role, content, animate = true) {
@@ -40,7 +57,7 @@ function appendMessage(role, content, animate = true) {
 
   const avatar = document.createElement("div");
   avatar.className = `avatar ${isBot ? "bot-avatar" : "user-avatar"}`;
-  avatar.textContent = isBot ? "PL" : "ME";
+  avatar.textContent = isBot ? "AI" : "ME";
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
@@ -55,7 +72,6 @@ function appendMessage(role, content, animate = true) {
   wrapper.appendChild(avatar);
   wrapper.appendChild(bubble);
   wrapper.appendChild(ts);
-
   chatWindow.appendChild(wrapper);
   chatWindow.scrollTop = chatWindow.scrollHeight;
   return wrapper;
@@ -68,7 +84,7 @@ function showTyping() {
 
   const avatar = document.createElement("div");
   avatar.className = "avatar bot-avatar";
-  avatar.textContent = "PL";
+  avatar.textContent = "AI";
 
   const bubble = document.createElement("div");
   bubble.className = "bubble typing-bubble";
@@ -89,11 +105,16 @@ function removeTyping() {
   if (el) el.remove();
 }
 
-// ─── Send message ─────────────────────────────────────────────────────────────
+function autoResize() {
+  userInput.style.height = "auto";
+  userInput.style.height = Math.min(userInput.scrollHeight, 120) + "px";
+}
+
 async function sendMessage() {
   const message = userInput.value.trim();
   if (!message) return;
 
+  openChat();
   const previousHistory = conversationHistory.slice(-10);
 
   appendMessage("user", message);
@@ -118,23 +139,54 @@ async function sendMessage() {
     const data = await res.json();
     removeTyping();
 
-    const reply = data.reply || "Sorry, I couldn't process that. Please try again.";
+    const reply = data.reply || "Sorry, I could not process that. Please try again.";
     appendMessage("assistant", reply);
     conversationHistory.push({ role: "assistant", content: reply });
-
-  } catch (err) {
+  } catch {
     removeTyping();
-    appendMessage("assistant", "⚠️ Connection error. Please check your internet or contact us at info@prolearn.edu.");
+    appendMessage("assistant", "Connection error. Please check your internet or contact the ProLearn team directly.");
   } finally {
     sendBtn.disabled = false;
     userInput.focus();
   }
 }
 
-// ─── Input events ─────────────────────────────────────────────────────────────
-userInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
+async function loadQuickQuestions() {
+  const container = document.getElementById("quick-questions");
+  try {
+    const res = await fetch("/quick-questions");
+    const data = await res.json();
+    container.innerHTML = "";
+
+    data.questions.forEach((question) => {
+      const btn = document.createElement("button");
+      btn.className = "quick-pill";
+      btn.type = "button";
+      btn.textContent = question;
+      btn.addEventListener("click", () => {
+        userInput.value = question;
+        charCount.textContent = `${question.length}/500`;
+        sendMessage();
+      });
+      container.appendChild(btn);
+    });
+  } catch {
+    container.innerHTML = '<p style="font-size:12px;color:var(--widget-muted)">Could not load suggestions.</p>';
+  }
+}
+
+chatLaunchers.forEach((launcher) => launcher.addEventListener("click", openChat));
+closeChat.addEventListener("click", hideChat);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && chatWidget.classList.contains("open")) {
+    hideChat();
+  }
+});
+
+userInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
     sendMessage();
   }
 });
@@ -146,56 +198,38 @@ userInput.addEventListener("input", () => {
 
 sendBtn.addEventListener("click", sendMessage);
 
-function autoResize() {
-  userInput.style.height = "auto";
-  userInput.style.height = Math.min(userInput.scrollHeight, 140) + "px";
-}
-
-// ─── Quick questions ──────────────────────────────────────────────────────────
-async function loadQuickQuestions() {
-  try {
-    const res = await fetch("/quick-questions");
-    const data = await res.json();
-    const container = document.getElementById("quick-questions");
-    container.innerHTML = "";
-    data.questions.forEach((q) => {
-      const btn = document.createElement("button");
-      btn.className = "quick-pill";
-      btn.textContent = q;
-      btn.addEventListener("click", () => {
-        userInput.value = q;
-        charCount.textContent = `${q.length}/500`;
-        sendMessage();
-      });
-      container.appendChild(btn);
-    });
-  } catch {
-    document.getElementById("quick-questions").innerHTML =
-      '<p style="font-size:12px;color:var(--muted)">Could not load suggestions.</p>';
-  }
-}
-
-// ─── Welcome timestamp ────────────────────────────────────────────────────────
 document.getElementById("welcomeTs").textContent = formatTime();
 
-// ─── Contact modal ────────────────────────────────────────────────────────────
-const modal        = document.getElementById("contactModal");
-const openContact  = document.getElementById("openContact");
+const modal = document.getElementById("contactModal");
+const openContact = document.getElementById("openContact");
 const closeContact = document.getElementById("closeContact");
-const submitContact= document.getElementById("submitContact");
-const contactStatus= document.getElementById("contactStatus");
+const submitContact = document.getElementById("submitContact");
+const contactStatus = document.getElementById("contactStatus");
 
-openContact.addEventListener("click", () => modal.classList.add("open"));
-closeContact.addEventListener("click", () => modal.classList.remove("open"));
-modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+openContact.addEventListener("click", () => {
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+});
+
+closeContact.addEventListener("click", () => {
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+});
+
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+});
 
 submitContact.addEventListener("click", async () => {
-  const name    = document.getElementById("contactName").value.trim();
-  const email   = document.getElementById("contactEmail").value.trim();
+  const name = document.getElementById("contactName").value.trim();
+  const email = document.getElementById("contactEmail").value.trim();
   const message = document.getElementById("contactMessage").value.trim();
 
   if (!name || !email || !message) {
-    contactStatus.style.color = "#ff6b6b";
+    contactStatus.style.color = "#f0647b";
     contactStatus.textContent = "Please fill in all fields.";
     return;
   }
@@ -210,14 +244,17 @@ submitContact.addEventListener("click", async () => {
       body: JSON.stringify({ name, email, message })
     });
     const data = await res.json();
-    contactStatus.style.color = "var(--accent)";
+    contactStatus.style.color = "var(--green)";
     contactStatus.textContent = data.message;
     document.getElementById("contactName").value = "";
     document.getElementById("contactEmail").value = "";
     document.getElementById("contactMessage").value = "";
-    setTimeout(() => modal.classList.remove("open"), 2500);
+    setTimeout(() => {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }, 2200);
   } catch {
-    contactStatus.style.color = "#ff6b6b";
+    contactStatus.style.color = "#f0647b";
     contactStatus.textContent = "Failed to send. Please email us directly.";
   } finally {
     submitContact.disabled = false;
@@ -225,5 +262,4 @@ submitContact.addEventListener("click", async () => {
   }
 });
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
 loadQuickQuestions();

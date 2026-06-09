@@ -140,3 +140,5 @@ Email: tchamidaryl@gmail.com | Phone: +237 654221901
 Scalability:
 use posthug for monitory
 Email: tchamidaryl@gmail.com | Phone: +237 654221901
+
+Contributor: bryantech
